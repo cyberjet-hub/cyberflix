@@ -1,5 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h1>Confirm your email</h1>
-  <p>Please check your email for the confirmation link. If you didn't receive it, you can <a href="{{ url_for('auth.resend_confirmation') }}">request a new one</a> after logging in.</p>
+  <div class="auth-shell">
+    <div class="auth-card">
+      {% include 'partials/flash_messages.html' %}
+      <h1>Confirm your email</h1>
+      <p class="subhead">Check your inbox for the confirmation link.</p>
+      <p class="muted">
+        If you did not receive it, log in and request a fresh link.
+      </p>
+    </div>
+  </div>
 {% endblock %}

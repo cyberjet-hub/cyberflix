@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
+from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask_login import login_user, logout_user, login_required, current_user
 from .forms import LoginForm, RegisterForm
 from .models import User
 from . import db, login_manager
-from flask_login import login_user, logout_user, login_required
 from .email import generate_confirmation_token, confirm_token, send_confirmation_email
-
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -36,22 +35,23 @@ def signup():
         if existing:
             flash('Email already registered. Try logging in.', 'warning')
             return redirect(url_for('auth.login'))
-        u = User(full_name=form.full_name.data, email=form.email.data.lower())
-        u.set_password(form.password.data)
-        db.session.add(u)
+
+        user = User(full_name=form.full_name.data, email=form.email.data.lower())
+        user.set_password(form.password.data)
+        db.session.add(user)
         db.session.commit()
 
-        # generate confirmation token
-        token = generate_confirmation_token(u.email)
+        token = generate_confirmation_token(user.email)
         confirm_url = url_for('auth.confirm_email', token=token, _external=True)
-        sent = send_confirmation_email(u.email, confirm_url)
+        sent = send_confirmation_email(user.email, confirm_url)
         if sent:
             flash('Account created! A confirmation email has been sent — check your inbox.', 'success')
         else:
-            # In dev environments without mail, surface the link to the user
             flash('Account created! (Development mode: email not configured)', 'success')
             flash(f'Confirmation link (dev): {confirm_url}', 'info')
+
         return redirect(url_for('auth.login'))
+
     return render_template('signup.html', form=form)
 
 @auth_bp.route('/confirm/<token>')
@@ -60,18 +60,22 @@ def confirm_email(token):
     if not email:
         flash('The confirmation link is invalid or has expired.', 'danger')
         return redirect(url_for('auth.login'))
+
     user = User.query.filter_by(email=email).first()
     if not user:
         flash('Account not found for that confirmation link.', 'danger')
         return redirect(url_for('auth.signup'))
+
     if user.confirmed:
         flash('Account already confirmed. Please log in.', 'info')
         return redirect(url_for('auth.login'))
-    user.confirmed = True
+
     from datetime import datetime
+    user.confirmed = True
     user.confirmed_at = datetime.utcnow()
     db.session.add(user)
     db.session.commit()
+
     flash('Your account has been confirmed! You can now log in.', 'success')
     return redirect(url_for('auth.login'))
 

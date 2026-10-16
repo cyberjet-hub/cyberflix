@@ -9,7 +9,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_TIME_LIMIT = None
 
-    # Mail settings (optional - set these in instance/.env for production email sending)
     MAIL_SERVER = environ.get('MAIL_SERVER')
     MAIL_PORT = int(environ.get('MAIL_PORT') or 0)
     MAIL_USERNAME = environ.get('MAIL_USERNAME')

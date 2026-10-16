@@ -1,25 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h1>Login</h1>
-  {% include 'partials/flash_messages.html' %}
-  <form method="post" class="auth-form" novalidate>
-    {{ form.hidden_tag() }}
-    <label for="email">{{ form.email.label }}</label>
-    {{ form.email(class_='input', id='email') }}
+  <div class="auth-shell">
+    <div class="auth-card">
+      {% include 'partials/flash_messages.html' %}
+      <div class="brand-row">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Cyberflix logo" class="brand-logo">
+      </div>
+      <h1>Welcome back</h1>
+      <p class="subhead">Log in to keep streaming</p>
 
-    <label for="password">{{ form.password.label }}</label>
-    <div class="password-row">
-      {{ form.password(class_='input', id='password') }}
-      <button type="button" class="pw-toggle" data-target="password">Show</button>
+      <form method="post" class="auth-form" novalidate>
+        {{ form.hidden_tag() }}
+
+        <label for="email">{{ form.email.label }}</label>
+        {{ form.email(class_='input', id='email', placeholder='you@example.com') }}
+
+        <label for="password">{{ form.password.label }}</label>
+        <div class="password-row">
+          {{ form.password(class_='input', id='password', placeholder='Your password') }}
+          <button type="button" class="pw-toggle" data-target="password">Show</button>
+        </div>
+
+        <div class="row-between">
+          <label class="remember">{{ form.remember() }} {{ form.remember.label }}</label>
+          <a href="#" class="small-link">Forgot?</a>
+        </div>
+
+        <button type="submit" class="btn primary full-width">{{ form.submit.label.text }}</button>
+
+        <p class="muted note">Don't have an account? <a href="{{ url_for('auth.signup') }}">Create one</a></p>
+      </form>
     </div>
-
-    <div class="row-between">
-      <label class="remember">{{ form.remember() }} {{ form.remember.label }}</label>
-      <a href="#" class="small-link">Forgot?</a>
-    </div>
-
-    <button type="submit" class="btn primary" id="login-btn">{{ form.submit.label.text }}</button>
-
-    <p class="muted">Don't have an account? <a href="/auth/signup">Sign up</a></p>
-  </form>
+  </div>
 {% endblock %}

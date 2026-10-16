@@ -1,29 +1,39 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h1>Create account</h1>
-  {% include 'partials/flash_messages.html' %}
-  <form method="post" class="auth-form" novalidate>
-    {{ form.hidden_tag() }}
-    <label for="full_name">{{ form.full_name.label }}</label>
-    {{ form.full_name(class_='input', id='full_name') }}
+  <div class="auth-shell">
+    <div class="auth-card">
+      {% include 'partials/flash_messages.html' %}
+      <div class="brand-row">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Cyberflix logo" class="brand-logo">
+      </div>
+      <h1>Create account</h1>
+      <p class="subhead">Start your Cyberflix journey</p>
 
-    <label for="email">{{ form.email.label }}</label>
-    {{ form.email(class_='input', id='email') }}
+      <form method="post" class="auth-form" novalidate>
+        {{ form.hidden_tag() }}
 
-    <label for="password">{{ form.password.label }}</label>
-    <div class="password-row">
-      {{ form.password(class_='input', id='password') }}
-      <button type="button" class="pw-toggle" data-target="password">Show</button>
+        <label for="full_name">{{ form.full_name.label }}</label>
+        {{ form.full_name(class_='input', id='full_name', placeholder='Your full name') }}
+
+        <label for="email">{{ form.email.label }}</label>
+        {{ form.email(class_='input', id='email', placeholder='you@example.com') }}
+
+        <label for="password">{{ form.password.label }}</label>
+        <div class="password-row">
+          {{ form.password(class_='input', id='password', placeholder='Create a password') }}
+          <button type="button" class="pw-toggle" data-target="password">Show</button>
+        </div>
+
+        <label for="confirm">{{ form.confirm.label }}</label>
+        <div class="password-row">
+          {{ form.confirm(class_='input', id='confirm', placeholder='Repeat your password') }}
+          <button type="button" class="pw-toggle" data-target="confirm">Show</button>
+        </div>
+
+        <button type="submit" class="btn primary full-width">{{ form.submit.label.text }}</button>
+
+        <p class="muted note">Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+      </form>
     </div>
-
-    <label for="confirm">{{ form.confirm.label }}</label>
-    <div class="password-row">
-      {{ form.confirm(class_='input', id='confirm') }}
-      <button type="button" class="pw-toggle" data-target="confirm">Show</button>
-    </div>
-
-    <button type="submit" class="btn primary">{{ form.submit.label.text }}</button>
-
-    <p class="muted">Already have an account? <a href="/auth/login">Log in</a></p>
-  </form>
+  </div>
 {% endblock %}
