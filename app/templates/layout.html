@@ -8,14 +8,21 @@
 </head>
 <body>
   <nav class="nav">
-    <div class="logo">Cyberflix</div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/catalogue">Movies</a>
-      <a href="/my-list">My List</a>
+    <div class="nav-left">
+      <div class="logo"><a href="/">Cyberflix</a></div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/catalogue">Movies</a>
+        <a href="/my-list">My List</a>
+      </div>
     </div>
     <div class="nav-account">
-      <a href="/auth/login">Log in</a>
+      {% if current_user.is_authenticated %}
+        <span class="user-name">Hello, {{ current_user.full_name.split(' ')[0] }}</span>
+        <a href="/auth/logout">Logout</a>
+      {% else %}
+        <a href="/auth/login">Log in</a>
+      {% endif %}
     </div>
   </nav>
   <main class="container">

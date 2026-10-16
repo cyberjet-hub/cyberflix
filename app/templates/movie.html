@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+  {% include 'partials/flash_messages.html' %}
+  <div class="movie-detail">
+    <div class="movie-poster">
+      <img src="{{ movie.poster_url }}" alt="{{ movie.title }} poster">
+    </div>
+    <div class="movie-meta">
+      <h1>{{ movie.title }} <span class="year">({{ movie.release_year }})</span></h1>
+      <div class="meta-line">Genre: {{ movie.genre or '—' }}</div>
+      <p class="description">{{ movie.description }}</p>
+
+      <div class="actions">
+        {% if movie.authorized_video %}
+          <a class="btn" href="{{ url_for('main.play', movie_id=movie.id) }}">Play</a>
+        {% else %}
+          <button class="btn disabled" disabled>Unavailable</button>
+        {% endif %}
+
+        <form method="post" action="{{ url_for('main.add_to_list', movie_id=movie.id) }}" style="display:inline">
+          {{ csrf_token() }}
+          <button class="btn ghost" type="submit">Add to My List</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

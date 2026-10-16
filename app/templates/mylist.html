@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>My List</h1>
+  {% include 'partials/flash_messages.html' %}
+  {% if items %}
+    <div class="grid mylist-grid">
+      {% for item in items %}
+        <div class="card">
+          <a href="/movie/{{ item.movie.id }}"><img src="{{ item.movie.poster_url }}" alt="{{ item.movie.title }}"></a>
+          <div class="card-title">{{ item.movie.title }}</div>
+          <form method="post" action="{{ url_for('main.remove_from_list', item_id=item.id) }}">
+            {{ csrf_token() }}
+            <button class="btn small" type="submit">Remove</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>Your watchlist is empty. Browse the <a href="/catalogue">catalogue</a> and add titles.</p>
+    </div>
+  {% endif %}
+{% endblock %}

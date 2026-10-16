@@ -1,22 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
   <h1>Login</h1>
-  <form method="post">
+  {% include 'partials/flash_messages.html' %}
+  <form method="post" class="auth-form" novalidate>
     {{ form.hidden_tag() }}
-    <div>
-      {{ form.email.label }}<br>
-      {{ form.email(size=32) }}
+    <label for="email">{{ form.email.label }}</label>
+    {{ form.email(class_='input', id='email') }}
+
+    <label for="password">{{ form.password.label }}</label>
+    <div class="password-row">
+      {{ form.password(class_='input', id='password') }}
+      <button type="button" class="pw-toggle" data-target="password">Show</button>
     </div>
-    <div>
-      {{ form.password.label }}<br>
-      {{ form.password(size=32) }}
+
+    <div class="row-between">
+      <label class="remember">{{ form.remember() }} {{ form.remember.label }}</label>
+      <a href="#" class="small-link">Forgot?</a>
     </div>
-    <div>
-      {{ form.remember() }} {{ form.remember.label }}
-    </div>
-    <div>
-      {{ form.submit(class_='btn') }}
-    </div>
-    <p>Don't have an account? <a href="/auth/signup">Sign up</a></p>
+
+    <button type="submit" class="btn primary" id="login-btn">{{ form.submit.label.text }}</button>
+
+    <p class="muted">Don't have an account? <a href="/auth/signup">Sign up</a></p>
   </form>
 {% endblock %}

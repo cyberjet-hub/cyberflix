@@ -1,21 +1,53 @@
-/* Basic dark cinematic styles for Cyberflix MVP */
+/* Cyberflix styles: enhanced UI for forms, layout, and glassmorphism */
 :root{
-  --bg:#070707;
-  --panel:rgba(255,255,255,0.04);
+  --bg:#030305;
+  --panel:rgba(255,255,255,0.03);
   --accent:#7c5cff;
   --accent2:#00e5ff;
   --text:#e6e6e6;
+  --muted:#a6a6b0;
 }
-body{background:linear-gradient(180deg,#000 0%,#070707 100%);color:var(--text);font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:transparent}
-.logo{font-weight:700;color:var(--accent)}
-.nav a{color:var(--text);margin-left:12px;text-decoration:none}
-.container{padding:24px}
+*{box-sizing:border-box}
+body{background:linear-gradient(180deg,#000 0%,#030305 100%);color:var(--text);font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0;min-height:100vh}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+.nav-left{display:flex;align-items:center;gap:16px}
+.logo a{font-weight:800;color:var(--accent);text-decoration:none;font-size:1.25rem}
+.nav-links a{color:var(--muted);margin-left:12px;text-decoration:none}
+.nav-account{color:var(--muted)}
+.container{padding:24px;max-width:1100px;margin:0 auto}
 .hero{display:flex;gap:20px;margin-bottom:24px}
 .hero-card{display:flex;gap:20px;align-items:center}
 .hero-card img{width:220px;height:320px;object-fit:cover;border-radius:8px}
-.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 16px;color:#021; border-radius:6px;text-decoration:none}
-.row .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.btn{display:inline-block;background:var(--panel);padding:10px 14px;color:var(--text); border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.04)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001;padding:12px 18px;font-weight:700}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.btn.small{padding:6px 8px;font-size:0.85rem}
+.row .grid,.mylist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
 .card img{width:100%;height:200px;object-fit:cover;border-radius:6px}
 .card-title{margin-top:6px;font-size:0.95rem}
-form div{margin-bottom:12px}
+.movie-detail{display:flex;gap:24px}
+.movie-poster img{width:260px;height:380px;object-fit:cover;border-radius:8px}
+.movie-meta h1{margin:0}
+.meta-line{color:var(--muted);margin-top:8px}
+.description{margin-top:12px;line-height:1.4;color:var(--muted)}
+.actions{margin-top:18px;display:flex;gap:12px}
+.empty-state{padding:40px;text-align:center;color:var(--muted)}
+.auth-form{max-width:420px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:20px;border-radius:12px;backdrop-filter:blur(6px)}
+.auth-form label{display:block;margin-bottom:6px;color:var(--muted)}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.password-row{display:flex;gap:8px}
+.pw-toggle{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted)}
+.row-between{display:flex;justify-content:space-between;align-items:center}
+.small-link{color:var(--muted);font-size:0.9rem}
+.flashes{margin-bottom:12px}
+.flash{padding:10px;border-radius:8px;margin-bottom:8px}
+.flash.success{background:rgba(124,92,255,0.12);border:1px solid rgba(124,92,255,0.18)}
+.flash.warning{background:rgba(255,200,0,0.06);border:1px solid rgba(255,200,0,0.12)}
+.flash.danger{background:rgba(255,80,80,0.06);border:1px solid rgba(255,80,80,0.12)}
+.player-wrap{max-width:900px;margin:0 auto}
+.player-title{margin:12px 0}
+.video-container{background:#000;padding:8px;border-radius:8px}
+@media (max-width:800px){
+  .movie-detail{flex-direction:column}
+  .movie-poster img{width:100%;height:auto}
+}

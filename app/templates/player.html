@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="player-wrap">
+    <a class="back-link" href="{{ url_for('main.movie_detail', movie_id=movie.id) }}">← Back to details</a>
+    <h1 class="player-title">{{ movie.title }}</h1>
+    <div class="video-container">
+      <video id="cyber-video" controls preload="metadata" width="100%" poster="{{ movie.poster_url }}">
+        <source src="{{ movie.authorized_video }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+{% endblock %}
