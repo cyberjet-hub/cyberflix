@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <section class="hero">
+    {% if featured %}
+      {% for m in featured %}
+        <div class="hero-card">
+          <img src="{{ m.poster_url }}" alt="{{ m.title }} poster">
+          <div class="hero-info">
+            <h1>{{ m.title }}</h1>
+            <p>{{ m.description }}</p>
+            <a class="btn" href="/movie/{{ m.id }}">Watch</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </section>
+  <section class="row">
+    <h2>Trending</h2>
+    <div class="grid">
+      {% for m in trending %}
+        <div class="card">
+          <a href="/movie/{{ m.id }}"><img src="{{ m.poster_url }}" alt="{{ m.title }}"></a>
+          <div class="card-title">{{ m.title }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

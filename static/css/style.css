@@ -1,0 +1,21 @@
+/* Basic dark cinematic styles for Cyberflix MVP */
+:root{
+  --bg:#070707;
+  --panel:rgba(255,255,255,0.04);
+  --accent:#7c5cff;
+  --accent2:#00e5ff;
+  --text:#e6e6e6;
+}
+body{background:linear-gradient(180deg,#000 0%,#070707 100%);color:var(--text);font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:transparent}
+.logo{font-weight:700;color:var(--accent)}
+.nav a{color:var(--text);margin-left:12px;text-decoration:none}
+.container{padding:24px}
+.hero{display:flex;gap:20px;margin-bottom:24px}
+.hero-card{display:flex;gap:20px;align-items:center}
+.hero-card img{width:220px;height:320px;object-fit:cover;border-radius:8px}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 16px;color:#021; border-radius:6px;text-decoration:none}
+.row .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:6px}
+.card-title{margin-top:6px;font-size:0.95rem}
+form div{margin-bottom:12px}
