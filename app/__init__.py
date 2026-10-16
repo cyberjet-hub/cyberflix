@@ -1,8 +1,9 @@
 from os import path
 from flask import Flask
-from . import db, migrate, login_manager, csrf
+from . import db, migrate, login_manager, csrf, mail
 
 from flask_sqlalchemy import SQLAlchemy
+
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
@@ -16,6 +17,7 @@ def create_app():
     migrate.init_app(app, db)
     login_manager.init_app(app)
     csrf.init_app(app)
+    mail.init_app(app)
 
     login_manager.login_view = 'auth.login'
 

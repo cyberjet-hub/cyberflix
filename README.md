@@ -4,6 +4,9 @@ Cyberflix — a small Netflix-inspired streaming MVP (Flask + SQLite).
 
 This repository contains an initial scaffold and ongoing implementation for the Cyberflix MVP: Flask backend, SQLite models, authentication, pages (login/signup/home/catalogue/movie details), and seeded sample data.
 
+Email verification
+- Signup now sends a confirmation token link. To enable real email sending, set SMTP values in instance/.env (see below). If MAIL_SERVER is not configured, the confirmation link will be shown in a flash message for development.
+
 Setup (development)
 1. Clone the repo (you must have access to the private repository):
    - git clone git@github.com:cyberjet-hub/cyberflix.git
@@ -12,9 +15,10 @@ Setup (development)
    - source venv/bin/activate   (Windows: venv\Scripts\activate)
 3. Install dependencies:
    - pip install -r requirements.txt
-4. Create an instance .env file and set a strong secret:
+4. Create an instance .env file and set a strong secret and optional mail settings:
    - cp instance/.env.example instance/.env
    - Edit instance/.env and set FLASK_SECRET to a strong secret (do NOT commit this file).
+   - Optional mail settings (for sending confirmation emails): MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_DEFAULT_SENDER
 5. Run the app:
    - python run.py
 6. Open http://127.0.0.1:5000

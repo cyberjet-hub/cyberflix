@@ -1,0 +1,5 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>Confirm your email</h1>
+  <p>Please check your email for the confirmation link. If you didn't receive it, you can <a href="{{ url_for('auth.resend_confirmation') }}">request a new one</a> after logging in.</p>
+{% endblock %}
